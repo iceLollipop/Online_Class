@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.spring.online_class.mapper.VideoOrderMapper">
+
+    <!-- 根据条件查找查找用户 -->
+    <select id="findVideoOrderByCondition" resultType="VideoOrder">
+        SELECT * FROM video_order WHERE user_id = #{user_id} and video_id = #{video_id} and state = #{state}
+    </select>
+
+    <!-- 注册用户 -->
+    <insert id="saveOrder" parameterType="VideoOrder" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO video_order(user_id,video_id,video_title,video_img,out_trade_no,total_fee,create_time,state)
+        VALUES (
+                   #{userId,jdbcType=INTEGER},
+                   #{videoId,jdbcType=VARCHAR},
+                   #{videoTitle,jdbcType=VARCHAR},
+                   #{videoImg,jdbcType=VARCHAR},
+                   #{outTradeNo,jdbcType=VARCHAR},
+                   #{totalFee,jdbcType=VARCHAR},
+                   #{createTime,jdbcType=TIMESTAMP},
+                   #{state,jdbcType=INTEGER}
+               )
+    </insert>
+
+</mapper>

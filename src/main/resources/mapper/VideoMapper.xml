@@ -6,6 +6,11 @@
         SELECT * FROM video
     </select>
 
+    <!-- 查询视频 不关联其他对象 -->
+    <select id="findById" resultType="Video">
+        SELECT * FROM video WHERE id = #{video_id}
+    </select>
+
     <!-- 查询轮播图列表 -->
     <select id="listVideoBanner" resultType="VideoBanner">
         SELECT * FROM video_banner ORDER BY weight ASC
@@ -38,6 +43,7 @@
         </collection>
     </resultMap>
 
+    <!-- 查询视频详情 会关联章集 -->
     <select id="findDetailById" resultMap="VideoDetailResultMap">
         SELECT
             v.id, v.title,v.summary,v.cover_img,v.price,v.point,v.create_time,
