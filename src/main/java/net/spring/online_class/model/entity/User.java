@@ -1,5 +1,7 @@
 package net.spring.online_class.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 // 用户类
 public class User {
@@ -10,6 +12,7 @@ public class User {
     private String name;
 
     //密码
+    @JsonIgnore
     private String pwd;
 
     //头像

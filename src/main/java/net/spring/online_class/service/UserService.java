@@ -27,4 +27,11 @@ public interface UserService {
      * @return
      */
     String findUserByPhoneAndPwd(String phone, String pwd);
+
+    /**
+     * 根据token中保存的id信息 查询User对象
+     * @param userId
+     * @return
+     */
+    User findUserById(Integer userId);
 }

@@ -57,6 +57,16 @@ public class UserServiceimpl implements UserService {
         }
     }
 
+    /**
+     * 根据token中保存的id信息 查询User对象
+     * @param userId
+     * @return
+     */
+    @Override
+    public User findUserById(Integer userId) {
+        User user = userMapper.findUserById(userId);
+        return user;
+    }
 
     /**
      * 接收Post方法的userInfo信息 格式为json，转化为User对象

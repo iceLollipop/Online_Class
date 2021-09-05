@@ -26,4 +26,11 @@ public interface UserMapper {
      * @return
      */
     User findUserByPhoneAndPwd(@Param("phone") String phone,@Param("pwd") String pwd);
+
+    /**
+     * 根据token中保存的id信息 查询User对象
+     * @param userId
+     * @return
+     */
+    User findUserById(@Param("user_id") Integer userId);
 }
