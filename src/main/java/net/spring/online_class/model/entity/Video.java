@@ -1,5 +1,8 @@
 package net.spring.online_class.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 import java.util.List;
 
@@ -15,17 +18,21 @@ public class Video {
     private String summary;
 
     //封面图
+    @JsonProperty("cover_img")
     private String coverImg;
 
     //价格 以分为单位
     private Integer price;
 
     //创建时间
+    @JsonProperty("create_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     //评分 十分制 可以有小数
     private Double point;
 
+    @JsonProperty("chapter_list")
     private List<Chapter> chapterList;
 
     public Integer getId() {

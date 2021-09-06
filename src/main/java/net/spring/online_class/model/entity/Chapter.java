@@ -1,5 +1,8 @@
 package net.spring.online_class.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +12,7 @@ public class Chapter {
     private Integer id;
 
     //视频id
+    @JsonProperty("video_id")
     private Integer videoId;
 
     //章节名称
@@ -18,8 +22,11 @@ public class Chapter {
     private Integer ordered;
 
     //创建时间
+    @JsonProperty("create_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
+    @JsonProperty("episode_list")
     private List<Episode> episodeList;
 
     public Integer getId() {

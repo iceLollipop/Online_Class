@@ -1,5 +1,8 @@
 package net.spring.online_class.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 // 轮播图实体类
 public class VideoBanner {
@@ -13,7 +16,9 @@ public class VideoBanner {
     private String img;
 
     //创建时间
-    private Date createDate;
+    @JsonProperty("create_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date createTime;
 
     //权重
     private Integer weight;
@@ -42,12 +47,12 @@ public class VideoBanner {
         this.img = img;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getWeight() {
@@ -64,7 +69,7 @@ public class VideoBanner {
                 "id=" + id +
                 ", url='" + url + '\'' +
                 ", img='" + img + '\'' +
-                ", createDate=" + createDate +
+                ", createTime=" + createTime +
                 ", weight=" + weight +
                 '}';
     }

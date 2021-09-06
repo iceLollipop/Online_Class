@@ -1,6 +1,8 @@
 package net.spring.online_class.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 // 用户类
@@ -16,12 +18,15 @@ public class User {
     private String pwd;
 
     //头像
+    @JsonProperty("head_img")
     private String headImg;
 
     //手机号
     private String phone;
 
     //创建时间
+    @JsonProperty("create_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     public Integer getId() {
