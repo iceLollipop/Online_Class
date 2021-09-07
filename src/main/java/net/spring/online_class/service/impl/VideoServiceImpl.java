@@ -27,7 +27,22 @@ public class VideoServiceImpl implements VideoService {
      */
     @Override
     public List<Video> listVideo() {
-        return videoMapper.listVideo();
+        try{
+            Object cacheObj =  baseCache.getTenMinuteCache().get(CacheKeyManager.INDEX_VIDEO_LIST,()->{
+                List<Video> videoList = videoMapper.listVideo();
+                System.out.println("从数据库里面找视频列表");
+                return  videoList;
+            });
+            // 从缓存获取到值
+            if(cacheObj instanceof List){
+                List<Video> videoList = (List<Video>)cacheObj;
+                return videoList;
+            }
+        }catch (Exception e){
+
+        }
+        // 缓存无值&mapper无值 return null
+        return null;
     }
 
     /**
@@ -36,7 +51,6 @@ public class VideoServiceImpl implements VideoService {
      */
     @Override
     public List<VideoBanner> listVideoBanner() {
-
         try{
             Object cacheObj =  baseCache.getTenMinuteCache().get(CacheKeyManager.INDEX_BANNER_KEY,()->{
                 List<VideoBanner> bannerList = videoMapper.listVideoBanner();
@@ -61,7 +75,25 @@ public class VideoServiceImpl implements VideoService {
      */
     @Override
     public Video findDetailById(int videoId) {
-        Video video = videoMapper.findDetailById(videoId);
-        return video;
+        // Video video = videoMapper.findDetailById(videoId);
+        // return video;
+        String videoCacheKey = String.format(CacheKeyManager.VIDEO_DETAIL,videoId);
+        try{
+            Object cacheObject = baseCache.getOneHourCache().get( videoCacheKey, ()->{
+                // 需要使用mybaits关联复杂查询
+                Video video = videoMapper.findDetailById(videoId);
+                System.out.println("从数据库里面找视频详情");
+                return video;
+
+            });
+            if(cacheObject instanceof Video){
+                Video video = (Video)cacheObject;
+                return video;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        // 缓存无值&mapper无值 return null
+        return null;
     }
 }
