@@ -16,12 +16,12 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         try {
-            String accesToken = request.getHeader("token");
-            if (accesToken == null) {
-                accesToken = request.getParameter("token");
+            String accessToken = request.getHeader("token");
+            if (accessToken == null) {
+                accessToken = request.getParameter("token");
             }
-            if (StringUtils.isNotBlank(accesToken)) {
-                Claims claims = JWTUtils.checkJWT(accesToken);
+            if (StringUtils.isNotBlank(accessToken)) {
+                Claims claims = JWTUtils.checkJWT(accessToken);
                 if (claims == null) {
                     //告诉登录过期，重新登录
                     sendJsonMessage(response, JsonData.buildError("登录过期，重新登录"));
